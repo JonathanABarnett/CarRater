@@ -1,0 +1,1 @@
+TRUCK,10000,Ford,Ford,2012,56000,16,25,New Berlin,yes,4
