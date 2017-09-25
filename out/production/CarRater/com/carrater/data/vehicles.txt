@@ -1,1 +1,5 @@
-TRUCK,15345,Ford,Ford,2012,56000,16,25,New Berlin,yes,4
+TRUCK,10000,Ford,Ford,2012,56000,16,25,New Berlin,false,4
+CAR,10000,Toyota,Toyota,2013,98000,25,20,Springfield,Sedan
+TRUCK,12555,Dodge,Dodge,2012,15000,16,25,STL,false,4
+CAR,13999,Honda,Honda,2012,54600,28,10,Springfield,Hatchback
+TRUCK,20100,Dodge,Dodge,2015,189000,15,200,Chicago,false,4

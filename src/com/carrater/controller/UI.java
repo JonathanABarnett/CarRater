@@ -5,9 +5,7 @@ import com.carrater.vehicles.Car;
 import com.carrater.vehicles.Truck;
 import com.carrater.vehicles.Vehicle;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Vehicle User Interface
@@ -16,6 +14,8 @@ public class UI {
 
     private Scanner reader = new Scanner(System.in);
     private Map<Integer, Vehicle> vehicleLibrary = new HashMap<>();
+    private List<Car> carList = new ArrayList<>();
+    private List<Truck> truckList = new ArrayList<>();
     //private Vehicle vehicle;
 
     private String userInput;
@@ -136,6 +136,7 @@ public class UI {
 
     public void newCar() {
         Vehicle vehicle;
+        Car car;
         System.out.println("\nLet's add a new car.\n");
         System.out.println("What is the price of the car to the nearest dollar?");
         price = reader.nextLine();
@@ -156,7 +157,9 @@ public class UI {
         System.out.println("Where is the car located at?");
         location = reader.nextLine();
 
-        vehicle = new Car(price, make, model, year, miles, mpg, distanceAway, location, type);
+        car = new Car(price, make, model, year, miles, mpg, distanceAway, location, type);
+        carList.add(car);
+        vehicle = car;
         vehicleLibrary.put(vehicle.getID(), vehicle);
 
         cont = false;
@@ -165,6 +168,7 @@ public class UI {
 
     public void newTruck() {
         Vehicle vehicle;
+        Truck truck;
         System.out.println("\nLet's add a new truck.\n");
         System.out.println("What is the price of the truck to the nearest dollar?");
         price = reader.nextLine();
@@ -189,7 +193,9 @@ public class UI {
         System.out.println("Where is the truck located at?");
         location = reader.nextLine();
 
-        vehicle = new Truck(price, make, model, year, miles, mpg, distanceAway, location, fwd, doors);
+        truck = new Truck(price, make, model, year, miles, mpg, distanceAway, location, fwd, doors);
+        truckList.add(truck);
+        vehicle = truck;
         vehicleLibrary.put(vehicle.getID(), vehicle);
 /*
 Not needed right now.
@@ -225,21 +231,49 @@ Not needed right now.
             if (yesNo(userInput)) {
                 System.out.println("What is the ID?");
                 Integer getId = Integer.parseInt(reader.nextLine());
-                for (Integer key : this.vehicleLibrary.keySet()) {
-                    if (key.equals(getId)) {
-                        toEditVehicle = vehicleLibrary.get(key);
+
+                if (vehicleLibrary.containsKey(getId)) {
+                        toEditVehicle = vehicleLibrary.get(getId);
                         System.out.println(toEditVehicle);
-                    }
+                } else {
+                    System.out.println("That ID does not match.");
                 }
+
             } else {
                 listVehicles();
-                edit();
             }
             toEdit(toEditVehicle);
         } else {
             System.out.println("You do not have any vehicles to edit.");
+        }
+        cont = false;
+        prompt();
+    }
+
+    public void toEdit(Vehicle vehicleToEdit) {
+        try {
+            Vehicle vehicleEdit = vehicleToEdit;
+            System.out.println("What would you like to edit?");
+            System.out.println(editPrice + dots + "to edit the price.");
+            System.out.println(editMake + dots + "to edit the make.");
+            System.out.println(editModel + dots + "to edit the model.");
+            System.out.println(editYear + dots + "to edit the year.");
+            System.out.println(editMileage + dots + "to edit the distance away.");
+            System.out.println(editLocation + dots + "to edit the location.");
+            System.out.println(editNumberOfDoors + dots + "to edit the number of doors (Truck Only).");
+            System.out.println(edit4WD + dots + "to edit if 4WD (Truck Only).");
+            System.out.println(editType + dots + "to edit vehicle type (Car Only).");
+            userInput = reader.nextLine();
+            if (editPrice.equals(userInput)) {
+                System.out.println("What is the price of the truck to the nearest dollar?");
+                userInput = reader.nextLine();
+                vehicleEdit.setPrice(userInput);
+            }
+            vehicleLibrary.put(vehicleEdit.getID(), vehicleEdit);
             cont = false;
             prompt();
+        } catch(Exception e) {
+            System.out.println("Error: " + e);
         }
     }
 
@@ -254,29 +288,6 @@ Not needed right now.
         cont = false;
         prompt();
         //wouldYouLikeToContinue();
-    }
-
-    public void toEdit(Vehicle vehicleToEdit) {
-        Vehicle vehicleEdit = vehicleToEdit;
-        System.out.println("What would you like to edit?");
-        System.out.println(editPrice + dots + "to edit the price.");
-        System.out.println(editMake + dots + "to edit the make.");
-        System.out.println(editModel + dots + "to edit the model.");
-        System.out.println(editYear + dots + "to edit the year.");
-        System.out.println(editMileage + dots + "to edit the distance away.");
-        System.out.println(editLocation + dots + "to edit the location.");
-        System.out.println(editNumberOfDoors + dots + "to edit the number of doors (Truck Only).");
-        System.out.println(edit4WD + dots + "to edit if 4WD (Truck Only).");
-        System.out.println(editType + dots + "to edit vehicle type (Car Only).");
-        userInput = reader.nextLine();
-        if (editPrice.equals(userInput)) {
-            System.out.println("What is the price of the truck to the nearest dollar?");
-            userInput = reader.nextLine();
-            vehicleEdit.setPrice(userInput);
-        }
-        vehicleLibrary.put(vehicleEdit.getID(), vehicleEdit);
-        cont = false;
-        prompt();
     }
 
     public void remove() {

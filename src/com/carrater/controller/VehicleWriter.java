@@ -1,5 +1,7 @@
 package com.carrater.controller;
 
+import com.carrater.vehicles.Car;
+import com.carrater.vehicles.Truck;
 import com.carrater.vehicles.Vehicle;
 import org.apache.commons.io.FileUtils;
 
@@ -21,27 +23,26 @@ public class VehicleWriter {
 
     }
 
-    public VehicleWriter() {};
-
     public void writeVehicles() {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
 
             for (Map.Entry<Integer, Vehicle> entry : vehicleMap.entrySet()) {
                 if (entry.getValue().getVehicleType().toLowerCase().equals("truck")) {
+                    Truck truck = (Truck)entry.getValue();
                     bufferedWriter.write (entry.getValue().getVehicleType() + splitBy + entry.getValue().getPrice() + splitBy +
                             entry.getValue().getMake() + splitBy + entry.getValue().getMake() + splitBy + entry.getValue().getYear() + splitBy +
                             entry.getValue().getMiles() + splitBy + entry.getValue().getMpg() + splitBy + entry.getValue().getDistanceAway() + splitBy +
-                            entry.getValue().getLocation() + splitBy + "yes" + splitBy + "4\n");
+                            entry.getValue().getLocation() + splitBy + truck.getFwd() + splitBy + truck.getDoors() + "\n");
                 } else {
+                    Car car = (Car)entry.getValue();
                     bufferedWriter.write (entry.getValue().getVehicleType() + splitBy + entry.getValue().getPrice() + splitBy +
                             entry.getValue().getMake() + splitBy + entry.getValue().getMake() + splitBy + entry.getValue().getYear() + splitBy +
                             entry.getValue().getMiles() + splitBy + entry.getValue().getMpg() + splitBy + entry.getValue().getDistanceAway() + splitBy +
-                            entry.getValue().getLocation() + splitBy + "Sedan\n");
+                            entry.getValue().getLocation() + splitBy + car.getType() + "\n");
                 }
-                System.out.println("Vehicles saved.");
             }
-
+            System.out.println("Vehicles saved.");
         } catch (Exception e) {
             System.out.println("Exception: " + e);
         }
