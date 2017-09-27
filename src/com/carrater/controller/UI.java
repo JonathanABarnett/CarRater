@@ -47,7 +47,19 @@ public class UI {
     private final String edit4WD = "9";
     private final String editType = "10";
 
-    private boolean cont = false;
+    private final String PRICE_PROMT = "What is the price of the truck to the nearest dollar?";
+    private final String MAKE_PROMPT = "What is the make of the car? i.e. Ford, Toyota, Honda, etc.";
+    private final String MODEL_PROMPT = "What is the model of the car? i.e. Escape, Corolla, Civic etc.";
+    private final String YEAR_PROMPT = "What is the year of the car?";
+    private final String MILEAGE_PROMPT = "How many miles does the car have?";
+    private final String MPG_PROMPT = "What is the average MPG of the car? Hwy and Cty combined.";
+    private final String DISTANCE_AWAY_PROMPT = "How far away is the car located? (in miles)";
+    private final String LOCATION_PROMPT = "Where is the car located at?";
+    private final String NUM_DOORS_PROMPT = "How many doors does the truck have?";
+    private final String FOURWD_PROMPT = "Does the truck have 4WD?";
+    private final String TYPE_PROMPT = "What is the type of the car? i.e. Sedan, Hatchback, Convertible etc.";
+
+    private boolean cont = true;
 
     private String price = "0";
     private String make = "";
@@ -75,7 +87,7 @@ public class UI {
     }
 
     public void prompt() {
-        while (!cont) {
+        while (cont) {
             System.out.println("\n" + breaker);
             System.out.println("Please select from the following prompts to continue... \n");
             System.out.println(addVehicle + dots + "to add a new vehicle.");
@@ -112,7 +124,6 @@ public class UI {
         }else if (quit.equals(userInput)) {
             quitProgram();
         } else {
-            cont = false;
             prompt();
         }
     }
@@ -126,91 +137,61 @@ public class UI {
         } else if (truck.equals(userInput)) {
             newTruck();
         } else if (main.equals(userInput)) {
-            cont = false;
+            //cont = false;
             prompt();
         } else {
             System.out.println("Sorry, I didn't catch that.");
-            add();
+
         }
+        prompt();
+    }
+
+    public void getVehicleInfo() {
+        System.out.println(PRICE_PROMT);
+        price = reader.nextLine();
+        System.out.println(MAKE_PROMPT);
+        make = reader.nextLine();
+        System.out.println(MODEL_PROMPT);
+        model = reader.nextLine();
+        System.out.println(YEAR_PROMPT);
+        year = reader.nextLine();
+        System.out.println(MILEAGE_PROMPT);
+        miles = reader.nextLine();
+        System.out.println(MPG_PROMPT);
+        mpg = reader.nextLine();
+        System.out.println(DISTANCE_AWAY_PROMPT);
+        distanceAway = reader.nextLine();
+        System.out.println(LOCATION_PROMPT);
+        location = reader.nextLine();
     }
 
     public void newCar() {
         Vehicle vehicle;
         Car car;
         System.out.println("\nLet's add a new car.\n");
-        System.out.println("What is the price of the car to the nearest dollar?");
-        price = reader.nextLine();
-        System.out.println("What is the make of the car? i.e. Ford, Toyota, Honda, etc.");
-        make = reader.nextLine();
-        System.out.println("What is the model of the car? i.e. Escape, Corolla, Civic etc.");
-        model = reader.nextLine();
-        System.out.println("What is the type of the car? i.e. Sedan, Hatchback, Convertible etc.");
+        getVehicleInfo();
+        System.out.println(TYPE_PROMPT);
         type = reader.nextLine();
-        System.out.println("What is the year of the car?");
-        year = reader.nextLine();
-        System.out.println("How many miles does the car have?");
-        miles = reader.nextLine();
-        System.out.println("What is the average MPG of the car? Hwy and Cty combined.");
-        mpg = reader.nextLine();
-        System.out.println("How far away is the car located? (in miles)");
-        distanceAway = reader.nextLine();
-        System.out.println("Where is the car located at?");
-        location = reader.nextLine();
-
         car = new Car(price, make, model, year, miles, mpg, distanceAway, location, type);
         carList.add(car);
         vehicle = car;
         vehicleLibrary.put(vehicle.getID(), vehicle);
-
-        cont = false;
-        prompt();
     }
 
     public void newTruck() {
         Vehicle vehicle;
         Truck truck;
         System.out.println("\nLet's add a new truck.\n");
-        System.out.println("What is the price of the truck to the nearest dollar?");
-        price = reader.nextLine();
-
-        System.out.println("What is the make of the truck? i.e. Ford, Toyota, Dodge, etc.");
-        make = reader.nextLine();
-        System.out.println("What is the model of the truck? i.e. F-150, Tundra, Ram etc.");
-        model = reader.nextLine();
-        System.out.println("What is the year of the truck?");
-        year = reader.nextLine();
-        System.out.println("How many miles does the truck have?");
-        miles = reader.nextLine();
-        System.out.println("What is the average MPG of the truck? Hwy and Cty combined.");
-        mpg = reader.nextLine();
-        System.out.println("Does the truck have 4WD?");
+        getVehicleInfo();
+        System.out.println(FOURWD_PROMPT);
         userInput = reader.nextLine();
         fwd = yesNo(userInput);
-        System.out.println("How many doors does the truck have?");
+        System.out.println(NUM_DOORS_PROMPT);
         doors = reader.nextLine();
-        System.out.println("How far away is the truck located? (in miles)");
-        distanceAway = reader.nextLine();
-        System.out.println("Where is the truck located at?");
-        location = reader.nextLine();
-
         truck = new Truck(price, make, model, year, miles, mpg, distanceAway, location, fwd, doors);
         truckList.add(truck);
         vehicle = truck;
         vehicleLibrary.put(vehicle.getID(), vehicle);
-/*
-Not needed right now.
-        System.out.println("Does this look correct?");
-        System.out.println(truck);
-        userInput = reader.nextLine();
-        userInput = userInput.toLowerCase().trim();
-        if ("yes".equals(userInput) || "y".equals(userInput)) {
-            vehicleLibrary.put(vehicle.getID(), vehicle);
-        } else {
-            edit(vehicle);
-        }
-   */
-        cont = false;
-        prompt();
     }
 
     public boolean yesNo(String answer) {
@@ -237,40 +218,101 @@ Not needed right now.
                         System.out.println(toEditVehicle);
                 } else {
                     System.out.println("That ID does not match.");
+                    return;
                 }
 
             } else {
                 listVehicles();
+                return;
             }
             toEdit(toEditVehicle);
         } else {
             System.out.println("You do not have any vehicles to edit.");
         }
-        cont = false;
         prompt();
     }
 
     public void toEdit(Vehicle vehicleToEdit) {
+        Vehicle vehicleEdit = vehicleToEdit;
         try {
-            Vehicle vehicleEdit = vehicleToEdit;
+            if (vehicleToEdit.getVehicleType() == "TRUCK") {
+                vehicleEdit = (Truck) vehicleToEdit;
+            } else {
+                vehicleEdit = (Car) vehicleToEdit;
+            }
             System.out.println("What would you like to edit?");
             System.out.println(editPrice + dots + "to edit the price.");
             System.out.println(editMake + dots + "to edit the make.");
             System.out.println(editModel + dots + "to edit the model.");
             System.out.println(editYear + dots + "to edit the year.");
-            System.out.println(editMileage + dots + "to edit the distance away.");
+            System.out.println(editMileage + dots + "to edit the mileage of the car.");
+            System.out.println(editDistanceAway + dots + "to edit the distance away.");
             System.out.println(editLocation + dots + "to edit the location.");
             System.out.println(editNumberOfDoors + dots + "to edit the number of doors (Truck Only).");
             System.out.println(edit4WD + dots + "to edit if 4WD (Truck Only).");
             System.out.println(editType + dots + "to edit vehicle type (Car Only).");
             userInput = reader.nextLine();
+            userInput = userInput.toUpperCase().trim();
+
+            switch (Integer.parseInt(userInput)) {
+                case 1:
+                    System.out.println(PRICE_PROMT);
+                    userInput = reader.nextLine();
+                    vehicleEdit.setPrice(userInput);
+                    break;
+                case 2:
+                    System.out.println(MAKE_PROMPT);
+                    userInput = reader.nextLine();
+                    vehicleEdit.setMake(userInput);
+                    break;
+                case 3:
+                    System.out.println(MODEL_PROMPT);
+                    userInput = reader.nextLine();
+                    vehicleEdit.setModel(userInput);
+                    break;
+                case 4:
+                    System.out.println(YEAR_PROMPT);
+                    userInput = reader.nextLine();
+                    vehicleEdit.setYear(userInput);
+                    break;
+                case 5:
+                    System.out.println(MILEAGE_PROMPT);
+                    userInput = reader.nextLine();
+                    vehicleEdit.setMiles(userInput);
+                    break;
+                case 6:
+                    System.out.println(DISTANCE_AWAY_PROMPT);
+                    userInput = reader.nextLine();
+                    vehicleEdit.setDistanceAway(userInput);
+                    break;
+                case 7:
+                    System.out.println(LOCATION_PROMPT);
+                    userInput = reader.nextLine();
+                    vehicleEdit.setLocation(userInput);
+                    break;
+
+
+            }
+            /*
             if (editPrice.equals(userInput)) {
-                System.out.println("What is the price of the truck to the nearest dollar?");
+                System.out.println(PRICE_PROMT);
                 userInput = reader.nextLine();
                 vehicleEdit.setPrice(userInput);
-            }
+            } else if (editMake.equals(userInput)) {
+                System.out.println(MAKE_PROMPT);
+                userInput = reader.nextLine();
+                vehicleEdit.setMake(userInput);
+            } else if (editModel.equals(userInput)) {
+                System.out.println(MODEL_PROMPT);
+                userInput = reader.nextLine();
+                vehicleEdit.setModel(userInput);
+            } else if (editModel.equals(userInput)) {
+                System.out.println(MODEL_PROMPT);
+                userInput = reader.nextLine();
+                vehicleEdit.setModel(userInput);
+                */
+            System.out.println(vehicleEdit);
             vehicleLibrary.put(vehicleEdit.getID(), vehicleEdit);
-            cont = false;
             prompt();
         } catch(Exception e) {
             System.out.println("Error: " + e);
@@ -285,7 +327,7 @@ Not needed right now.
                 System.out.println(entry.getValue());
             }
         }
-        cont = false;
+       //cont = false;
         prompt();
         //wouldYouLikeToContinue();
     }
@@ -324,6 +366,18 @@ Not needed right now.
         prompt();
     }
 
+    public void rate() {
+        if(!vehicleLibrary.isEmpty()) {
+            Rater rater = new Rater(vehicleLibrary);
+            vehicleLibrary = rater.rateVehicles(vehicleLibrary);
+            rater.printRatedVehicles();
+        } else {
+            System.out.println("There are no vehicles to rate.");
+        }
+        //cont = false;
+        prompt();
+    }
+
     public void importVehicles() {
         VehicleReader vehicleReader = new VehicleReader("src\\com\\carrater\\data\\vehicles.txt");
         if (vehicleLibrary.isEmpty()) {
@@ -333,19 +387,7 @@ Not needed right now.
                 vehicleLibrary.put(entry.getKey(), entry.getValue());
             }
         }
-        cont = false;
-        prompt();
-    }
-
-    public void rate() {
-        if(!vehicleLibrary.isEmpty()) {
-            Rater rater = new Rater(vehicleLibrary);
-            vehicleLibrary = rater.rateVehicles(vehicleLibrary);
-            rater.printRatedVehicles();
-        } else {
-            System.out.println("There are no vehicles to rate.");
-        }
-        cont = false;
+        //cont = false;
         prompt();
     }
 
@@ -373,13 +415,14 @@ Not needed right now.
             VehicleWriter vehicleWriter = new VehicleWriter(vehicleLibrary);
             vehicleWriter.writeVehicles();
         }
-        cont = false;
+        //cont = false;
         prompt();
     }
 
     public void quitProgram() {
         System.out.println("Thank you for using our Vehicle Rating Program! We hope we were able to help you " +
                 "find the vehicle you are looking for.");
+        cont = false;
     }
 
 }

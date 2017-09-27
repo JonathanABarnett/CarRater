@@ -45,12 +45,14 @@ public class VehicleReader {
                     System.out.println("You have not specified a car or truck. Please check your file.");
                     break;
                 }
-                System.out.println("Read vehicles successfully.");
+
             }
 
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
+
+        System.out.println("Read vehicles successfully.");
 
         for (Vehicle vehicle : vehicleList) {
             vehicleMap.put(vehicle.getID(), vehicle);
