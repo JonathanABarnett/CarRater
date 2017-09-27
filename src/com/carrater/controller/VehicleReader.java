@@ -49,7 +49,7 @@ public class VehicleReader {
             }
 
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Your full list may not have imported fully. Error " + e);
         }
 
         System.out.println("Read vehicles successfully.");

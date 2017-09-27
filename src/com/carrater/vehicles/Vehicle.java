@@ -98,4 +98,5 @@ public abstract class Vehicle {
     public void setLocation(String location) {
         this.location = location;
     }
+
 }

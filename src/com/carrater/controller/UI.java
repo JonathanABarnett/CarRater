@@ -205,10 +205,11 @@ public class UI {
 
     public void edit() {
         if (!vehicleLibrary.isEmpty()) {
-            Vehicle toEditVehicle = null;
+            Vehicle toEditVehicle;
             System.out.println("Do you know the ID of the vehicle you would like to edit?");
             userInput = reader.nextLine();
             userInput = userInput.toLowerCase().trim();
+
             if (yesNo(userInput)) {
                 System.out.println("What is the ID?");
                 Integer getId = Integer.parseInt(reader.nextLine());
@@ -229,6 +230,7 @@ public class UI {
         } else {
             System.out.println("You do not have any vehicles to edit.");
         }
+
         prompt();
     }
 
@@ -248,9 +250,9 @@ public class UI {
             System.out.println(editMileage + dots + "to edit the mileage of the car.");
             System.out.println(editDistanceAway + dots + "to edit the distance away.");
             System.out.println(editLocation + dots + "to edit the location.");
-            System.out.println(editNumberOfDoors + dots + "to edit the number of doors (Truck Only).");
-            System.out.println(edit4WD + dots + "to edit if 4WD (Truck Only).");
-            System.out.println(editType + dots + "to edit vehicle type (Car Only).");
+            //System.out.println(editNumberOfDoors + dots + "to edit the number of doors (Truck Only).");
+            //System.out.println(edit4WD + dots + "to edit if 4WD (Truck Only).");
+            //System.out.println(editType + dots + "to edit vehicle type (Car Only).");
             userInput = reader.nextLine();
             userInput = userInput.toUpperCase().trim();
 
@@ -290,27 +292,19 @@ public class UI {
                     userInput = reader.nextLine();
                     vehicleEdit.setLocation(userInput);
                     break;
+                    /*
+                case 8:
+                    System.out.println(NUM_DOORS_PROMPT);
+                    userInput = reader.nextLine();
 
-
+                    Truck truck = new Truck(vehicleToEdit.getPrice(), vehicleToEdit.getMake(), vehicleToEdit.getModel(),
+                            vehicleToEdit.getYear(), vehicleToEdit.getMiles(), vehicleToEdit.getMpg(), vehicleToEdit.getDistanceAway(),
+                            vehicleToEdit.getLocation(), );
+*/
+                default:
+                    System.out.println("Sorry, that wasn't one of the options.");
+                    break;
             }
-            /*
-            if (editPrice.equals(userInput)) {
-                System.out.println(PRICE_PROMT);
-                userInput = reader.nextLine();
-                vehicleEdit.setPrice(userInput);
-            } else if (editMake.equals(userInput)) {
-                System.out.println(MAKE_PROMPT);
-                userInput = reader.nextLine();
-                vehicleEdit.setMake(userInput);
-            } else if (editModel.equals(userInput)) {
-                System.out.println(MODEL_PROMPT);
-                userInput = reader.nextLine();
-                vehicleEdit.setModel(userInput);
-            } else if (editModel.equals(userInput)) {
-                System.out.println(MODEL_PROMPT);
-                userInput = reader.nextLine();
-                vehicleEdit.setModel(userInput);
-                */
             System.out.println(vehicleEdit);
             vehicleLibrary.put(vehicleEdit.getID(), vehicleEdit);
             prompt();
