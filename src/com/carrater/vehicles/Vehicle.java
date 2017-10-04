@@ -1,7 +1,7 @@
 package com.carrater.vehicles;
 
 /**
- * Vehicle abstract class is the basic template that each vehicle must have in order to be critiqued
+ * Vehicle abstract class is the basic template that each vehicle must have in order to be rated.
  */
 public abstract class Vehicle {
 

@@ -1,5 +1,9 @@
 package com.carrater.vehicles;
 
+/**
+ * Truck based off of the vehicle class.
+ */
+
 public class Truck extends Vehicle {
 
     private boolean fwd;

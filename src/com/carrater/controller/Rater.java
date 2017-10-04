@@ -2,15 +2,13 @@ package com.carrater.controller;
 
 import com.carrater.vehicles.Vehicle;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Rater {
 
     private Map<Integer, Vehicle> vehicleMap;
 
-    private Map<Integer, Vehicle> ratedVehicles = new HashMap<>();
+    private Map<Integer, Vehicle> ratedVehicles = new TreeMap<>(Collections.reverseOrder());
 
     private Calendar calendar = Calendar.getInstance();
     private int thisYear = calendar.get(Calendar.YEAR);
@@ -18,16 +16,7 @@ public class Rater {
 
 
     public Rater(Map<Integer, Vehicle> vehicleLibrary) {
-
         this.vehicleMap = vehicleLibrary;
-/*
-        Map<Integer, Vehicle> ratedVehicles = rateVehicles(vehicleMap);
-
-        for (Map.Entry<Integer, Vehicle> entry : ratedVehicles.entrySet()) {
-            System.out.println("Rating: " + entry.getKey() + " " + entry.getValue());
-        }
-        */
-
     }
 
     //         Value,  Vehicle
@@ -42,7 +31,7 @@ public class Rater {
             value -= calculatePriceValue(entry.getValue().getPrice());
             value -= calculateMileageValue(entry.getValue().getMiles());
             value -= calculateMPGValue(entry.getValue().getMpg());
-            System.out.println("Car ID: " + entry.getValue().getID() + " Value: " + value);
+            //System.out.println("Car ID: " + entry.getValue().getID() + " Value: " + value);
             ratedVehicles.put(value, entry.getValue());
 
         }

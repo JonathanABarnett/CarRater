@@ -5,17 +5,14 @@ import com.carrater.vehicles.Truck;
 import com.carrater.vehicles.Vehicle;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class VehicleReader {
 
     private String filePath = "";
     private List<Vehicle> vehicleList = new ArrayList<>();
-    private Map<Integer, Vehicle> vehicleMap = new HashMap<>();
+    private Map<Integer, Vehicle> vehicleMap = new TreeMap<>();
     private UI ui = new UI();
 
 
@@ -49,7 +46,7 @@ public class VehicleReader {
             }
 
         } catch (Exception e) {
-            System.out.println("Your full list may not have imported fully. Error " + e);
+            System.out.println("Your CSV did not fully import.\nError: " + e);
         }
 
         System.out.println("Read vehicles successfully.");

@@ -1,5 +1,9 @@
 package com.carrater.vehicles;
 
+/**
+ * Car based off the vehicle class.
+ */
+
 public class Car extends Vehicle {
 
     private String type;

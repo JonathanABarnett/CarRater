@@ -31,13 +31,13 @@ public class VehicleWriter {
                 if (entry.getValue().getVehicleType().toLowerCase().equals("truck")) {
                     Truck truck = (Truck)entry.getValue();
                     bufferedWriter.write (entry.getValue().getVehicleType() + splitBy + entry.getValue().getPrice() + splitBy +
-                            entry.getValue().getMake() + splitBy + entry.getValue().getMake() + splitBy + entry.getValue().getYear() + splitBy +
+                            entry.getValue().getMake() + splitBy + entry.getValue().getModel() + splitBy + entry.getValue().getYear() + splitBy +
                             entry.getValue().getMiles() + splitBy + entry.getValue().getMpg() + splitBy + entry.getValue().getDistanceAway() + splitBy +
                             entry.getValue().getLocation() + splitBy + truck.getFwd() + splitBy + truck.getDoors() + "\n");
                 } else {
                     Car car = (Car)entry.getValue();
                     bufferedWriter.write (entry.getValue().getVehicleType() + splitBy + entry.getValue().getPrice() + splitBy +
-                            entry.getValue().getMake() + splitBy + entry.getValue().getMake() + splitBy + entry.getValue().getYear() + splitBy +
+                            entry.getValue().getMake() + splitBy + entry.getValue().getModel() + splitBy + entry.getValue().getYear() + splitBy +
                             entry.getValue().getMiles() + splitBy + entry.getValue().getMpg() + splitBy + entry.getValue().getDistanceAway() + splitBy +
                             entry.getValue().getLocation() + splitBy + car.getType() + "\n");
                 }

@@ -13,10 +13,9 @@ import java.util.*;
 public class UI {
 
     private Scanner reader = new Scanner(System.in);
-    private Map<Integer, Vehicle> vehicleLibrary = new HashMap<>();
+    private Map<Integer, Vehicle> vehicleLibrary = new TreeMap<>();
     private List<Car> carList = new ArrayList<>();
     private List<Truck> truckList = new ArrayList<>();
-    //private Vehicle vehicle;
 
     private String userInput;
     private final String breaker = "**********************";
@@ -196,7 +195,7 @@ public class UI {
 
     public boolean yesNo(String answer) {
         answer.toLowerCase().trim();
-        if ("yes".equals(answer) || "y".equals(answer)) {
+        if ("yes".equals(answer) || "y".equals(answer) || "true".equals(answer)) {
             return true;
         } else {
             return false;
@@ -321,9 +320,7 @@ public class UI {
                 System.out.println(entry.getValue());
             }
         }
-       //cont = false;
         prompt();
-        //wouldYouLikeToContinue();
     }
 
     public void remove() {
@@ -368,7 +365,6 @@ public class UI {
         } else {
             System.out.println("There are no vehicles to rate.");
         }
-        //cont = false;
         prompt();
     }
 
@@ -381,7 +377,6 @@ public class UI {
                 vehicleLibrary.put(entry.getKey(), entry.getValue());
             }
         }
-        //cont = false;
         prompt();
     }
 
